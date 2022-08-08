@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
                 self.onecmd(str + ' ' + s[0] + ' ' + s[1])
             except Exception:
                 continue
-        storage.save()
+        new_instance.save()
         print(new_instance.id)
 
     def help_create(self):
