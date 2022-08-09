@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """New engine DBStorage"""
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
 from os import getenv
@@ -19,9 +19,8 @@ class DBStorage:
         host = getenv("HBNB_MYSQL_HOST")
         db = getenv("HBNB_MYSQL_DB")
         env = getenv("HBNB_ENV")
-        print("USER: {}, PASSWD: {}, HOST: {}, DB: {}, ENV: {}".format(user, passwd, host, db, env))
-        self.__engine = create_engine('mysql+mysqldb://'
-            f'{user}:{passwd}@{host}/{db}', pool_pre_ping=True)
+        url = f'mysql+mysqldb://{user}:{passwd}@{host}/{db}'
+        self.__engine = create_engine(url, pool_pre_ping=True)
         if (env is not None and env == 'test'):
             Base.metadata.drop_all(bind=self.__engine)
 
@@ -48,11 +47,9 @@ class DBStorage:
         return dict_entries
 
     def new(self, obj):
-        print('SAVING STORAGE')
         self.__session.add(obj)
 
     def save(self):
-        print('COMMITTING STORAGE')
         self.__session.commit()
 
     def delete(self, obj=None):
