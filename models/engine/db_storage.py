@@ -42,7 +42,7 @@ class DBStorage:
                 for row in self.__session.query(base_class).all():
                     dict_entries[f'{base_class.__name__}.{row.id}'] = row
         else:
-            for row in self.__session.query(cls).all():
+            for row in self.__session.query(cls):
                 dict_entries[f'{cls.__name__}.{row.id}'] = row
         return dict_entries
 
