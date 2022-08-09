@@ -28,8 +28,9 @@ class DBStorage:
         from models.state import State
         from models.city import City
         from models.base_model import Base
+        from models.user import User
         tables = {
-#                    'user': User,
+                    'users': User,
 #                    'place': Place,
                     'states': State,
                     'cities': City,
@@ -59,6 +60,7 @@ class DBStorage:
     def reload(self):
         from models.state import State
         from models.city import City
+        from models.user import User
         from models.base_model import Base
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
