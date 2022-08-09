@@ -57,6 +57,8 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
+        from models.state import State
+        from models.city import City
         from models.base_model import Base
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
