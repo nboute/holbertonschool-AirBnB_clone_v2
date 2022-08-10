@@ -2,10 +2,20 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.review import Review
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from models.amenity import Amenity
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from os import getenv
 from models import storage
+
+
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -27,12 +37,30 @@ class Place(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship("Review", cascade="all, delete",
                                backref="place", passive_deletes=True)
+        amenities = relationship("Amenity", secondary=place_amenity,
+                                 viewonly=False, backref='place_amenities')
     else:
         @property
         def reviews(self):
-            """Return the list of cities"""
+            """Return the list of reviews"""
             list_reviews = []
             for value in storage.all(Review).values():
                 if value.place_id == self.id:
                     list_reviews.append(value)
             return list_reviews
+
+        @property
+        def amenities(self):
+            """Return the list of amenities"""
+            list_amenities = []
+            for value in storage.all(Amenity).values():
+                if value.place_id == self.id:
+                    list_amenities.append(value)
+            return list_amenities
+
+        @amenities.setter
+        def amenities(self, cls):
+            """Add the id of an amenity"""
+            if not isinstance(cls, Amenity):
+                return
+            self.amenity_ids.append(cls.id)
