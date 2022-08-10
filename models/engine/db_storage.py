@@ -27,17 +27,18 @@ class DBStorage:
     def all(self, cls=None):
         from models.state import State
         from models.city import City
-        from models.base_model import Base
         from models.user import User
         from models.place import Place
+        from models.review import Review
+        from models.base_model import Base
         tables = {
-                    'users': User,
-                    'place': Place,
-                    'states': State,
-                    'cities': City,
-#                    'amenity': Amenity,
-#                    'Review': Review
-                  }
+            'users': User,
+            'places': Place,
+            'states': State,
+            'cities': City,
+#           'amenity': Amenity,
+            'reviews': Review
+        }
         dict_entries = {}
         if cls is None:
             for base_class in tables.values():
@@ -63,6 +64,7 @@ class DBStorage:
         from models.city import City
         from models.user import User
         from models.place import Place
+        from models.review import Review
         from models.base_model import Base
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(sessionmaker(bind=self.__engine,
