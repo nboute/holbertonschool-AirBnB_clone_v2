@@ -25,6 +25,7 @@ class DBStorage:
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
+        """Return a dictionary"""
         from models.state import State
         from models.city import City
         from models.user import User
@@ -51,16 +52,20 @@ class DBStorage:
         return dict_entries
 
     def new(self, obj):
+        """Add an object"""
         self.__session.add(obj)
 
     def save(self):
+        """Commit the change"""
         self.__session.commit()
 
     def delete(self, obj=None):
+        """Delete an object"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
+        """Create the session"""
         from models.state import State
         from models.city import City
         from models.user import User
