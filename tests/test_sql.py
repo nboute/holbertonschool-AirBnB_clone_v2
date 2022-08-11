@@ -7,8 +7,10 @@ import io
 from console import HBNBCommand
 from os import getenv
 from models.engine.db_storage import DBStorage
+import os
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', "Not DBStorage")
 class TestMySQL(unittest.TestCase):
     """Test for the SQL database"""
     conn = None
@@ -48,7 +50,7 @@ class TestMySQL(unittest.TestCase):
             HBNBCommand().onecmd('create State name="California"')
         id = f.getvalue()[:-1]
         with patch('sys.stdout', new=io.StringIO()) as f:
-            HBNBCommand().onecmd(f'''create City state_id="{id}" 
+            HBNBCommand().onecmd(f'''create City state_id="{id}"
                                  name="San_Francisco"''')
         self.cur.execute("SELECT COUNT(*) FROM cities")
         res = self.cur.fetchone()[0]
