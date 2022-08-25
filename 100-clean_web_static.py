@@ -68,17 +68,15 @@ def deploy():
 
 def do_clean(number=0):
     """Clean files from current repo and servers"""
-    number = int(number)
-    if number == 0:
-        number = 1
+    n = int(number)
+    if n == 0:
+        n = 1
     files = local("ls -1t versions", capture=True)
-    files = files.stdout.splitlines()[number:]
-    for elem in files:
+    files_list = files.stdout.splitlines()[n:]
+    for elem in files_list:
         local("rm -rf versions/{}".format(elem))
     files = run("ls -1t /data/web_static/releases")
-    files_list = files.splitlines()[number:]
+    files_list = files.splitlines()[n:]
     for elem in files_list:
         filepath = elem
-        if len(filepath) > 0:
-            run("rm -rf /data/web_static/releases/" +
-                "{}".format(filepath))
+        run("rm -rf /data/web_static/releases/{}".format(filepath))
