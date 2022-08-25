@@ -5,7 +5,6 @@ from fabric.operations import put
 from fabric.operations import run
 from fabric.api import env
 from fabric.api import hosts
-import fabric
 from datetime import datetime
 from fabric.api import runs_once
 import os
@@ -38,14 +37,26 @@ def do_deploy(archive_path):
                  .format(filename[:-4]))
     if result.failed is True:
         return False
-    result = run(("tar -xzf /tmp/" +
-                  "{} -C /data/web_static/releases/{}/" +
-                  " --strip-components=1").format(filename, filename[:-4]))
+    result = run("tar -xzf /tmp/" +
+                  "{} -C /data/web_static/releases/{}/"
+                  .format(filename, filename[:-4]))
     if result.failed is True:
         return False
     result = run("rm /tmp/{}".format(filename))
     if result.failed is True:
         return False
+
+    result = run("mv /data/web_static/releases/" +
+                 "{0}/web_static/* /data/web_static/releases/{0}/"
+                 .format(filename[:-4:]))
+    if result.failed is True:
+        return False
+
+    result = run("rm -rf /data/web_static/releases/{}/web_static"
+                 .format(filename[:-4]))
+    if result.failed is True:
+        return False
+
     result = run("rm -rf /data/web_static/current")
     if result.failed is True:
         return False
