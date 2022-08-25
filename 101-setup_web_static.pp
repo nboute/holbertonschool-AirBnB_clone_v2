@@ -1,3 +1,5 @@
+# Configure web server for deployment of web_static
+
 exec {'/usr/bin/env apt update': }
 -> exec {'/usr/bin/env apt -y install nginx': }
 -> exec {'/usr/bin/env mkdir -p /data/web_static/releases/test': }
