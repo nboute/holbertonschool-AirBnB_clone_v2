@@ -7,11 +7,12 @@ from fabric.api import env
 from fabric.api import hosts
 import fabric
 from datetime import datetime
+from fabric.api import runs_once
 import os
 
 env.hosts = ['54.167.41.249', '54.160.234.222']
 
-
+@runs_once
 def do_pack():
     """Pack web_static folder for future deployment"""
     filename = "versions/web_static_{}.tgz".format(
