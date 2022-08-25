@@ -69,6 +69,8 @@ def deploy():
 def do_clean(number=0):
     """Clean files from current repo and servers"""
 
+    if number == 0:
+        number = 1
     files = local("ls -1t versions", capture=True)
     files = files.stdout.splitlines()[int(number):]
     for elem in files:
