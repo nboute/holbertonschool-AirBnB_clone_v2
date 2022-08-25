@@ -75,11 +75,7 @@ def do_clean(number=0):
         local("rm -rf versions/" +
               "{}".format(os.path.basename(elem)))
     files = run("ls -1t /data/web_static/releases")
-    print("HERE" + files + "<=")
     files_list = files.splitlines()[int(number):]
-    print("THEN:")
-    print(files_list)
-    print("<=")
     for elem in files_list:
         filepath = os.path.basename(elem)
         if len(filepath) > 0:
