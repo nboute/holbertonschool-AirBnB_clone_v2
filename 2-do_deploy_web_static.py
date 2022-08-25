@@ -39,11 +39,11 @@ def do_deploy(archive_path):
     if result.failed is True:
         return False
     result = run(("tar -xzf /tmp/" +
-                  "{} -C /data/web_static/releases/{}" +
+                  "{} -C /data/web_static/releases/{}/" +
                   " --strip-components=1").format(filename, filename[:-4]))
     if result.failed is True:
         return False
-    result = run("rm -rf /tmp/{}".format(filename))
+    result = run("rm /tmp/{}".format(filename))
     if result.failed is True:
         return False
     result = run("rm -rf /data/web_static/current")
