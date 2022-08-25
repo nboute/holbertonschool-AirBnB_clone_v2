@@ -29,10 +29,10 @@ def do_deploy(archive_path):
     """Deploy given archive to web server"""
     if os.path.exists(archive_path) is False:
         return False
-    result = put(archive_path, '/tmp/')
+    filename = os.path.basename(archive_path)
+    result = put(archive_path, '/tmp/{}'.format(filename))
     if result.failed is True:
         return False
-    filename = os.path.basename(archive_path)
     result = run("mkdir -p /data/web_static/releases/{}".format(filename[:-4]))
     if result.failed is True:
         return False
