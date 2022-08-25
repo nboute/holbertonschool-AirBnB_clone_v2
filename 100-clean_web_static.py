@@ -72,12 +72,11 @@ def do_clean(number=0):
     files = local("ls -1t versions", capture=True)
     files = files.stdout.splitlines()[int(number):]
     for elem in files:
-        local("rm -rf versions/" +
-              "{}".format(os.path.basename(elem)))
+        local("rm -rf versions/{}".format(elem))
     files = run("ls -1t /data/web_static/releases")
     files_list = files.splitlines()[int(number):]
     for elem in files_list:
-        filepath = os.path.basename(elem)
+        filepath = elem
         if len(filepath) > 0:
             run("rm -rf /data/web_static/releases/" +
                 "{}".format(filepath))
