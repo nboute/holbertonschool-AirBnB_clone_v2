@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""Fabric Configuration script for deploying web_static"""
 from fabric.operations import local
 from fabric.operations import put
 from fabric.operations import run
@@ -8,6 +8,8 @@ from fabric.api import hosts
 import fabric
 from datetime import datetime
 import os
+
+env.hosts = ['54.167.41.249', '54.160.234.222']
 
 
 def do_pack():
@@ -20,9 +22,6 @@ def do_pack():
         return None
     else:
         return filename
-
-
-env.hosts = ['54.167.41.249', '54.160.234.222']
 
 
 def do_deploy(archive_path):
