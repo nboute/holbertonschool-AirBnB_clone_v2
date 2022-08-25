@@ -33,7 +33,7 @@ def do_deploy(archive_path):
     result = put(archive_path, '/tmp/{}'.format(filename))
     if result.failed is True:
         return False
-    result = run("mkdir -p /data/web_static/releases/{}".format(filename[:-4]))
+    result = run("mkdir -p /data/web_static/releases/{}/".format(filename[:-4]))
     if result.failed is True:
         return False
     result = run(("tar -xzf /tmp/" +
