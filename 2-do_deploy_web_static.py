@@ -51,4 +51,5 @@ def do_deploy(archive_path):
                  "{} /data/web_static/current".format(filename[:-4]))
     if result.failed is True:
         return False
-    print("Deployment done for {}".format(env.host))
+    print("New version deployed!")
+    return True
