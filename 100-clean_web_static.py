@@ -58,7 +58,6 @@ def do_deploy(archive_path):
     return True
 
 
-
 def deploy():
     """Pack web_static and deploy it"""
     filename = do_pack()
