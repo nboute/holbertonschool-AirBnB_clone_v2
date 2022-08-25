@@ -13,6 +13,7 @@ import os
 
 @runs_once
 def do_pack():
+    """Pack web_static folder for future deployment"""
     filename = "versions/web_static_{}.tgz".format(
         datetime.now().strftime("%Y%m%d%H%M%S"))
     local("mkdir -p versions")
@@ -27,6 +28,7 @@ env.hosts = ['54.167.41.249', '54.160.234.222']
 
 
 def do_deploy(archive_path):
+    """Deploy given archive to web server"""
     if os.path.exists(archive_path) is False:
         return False
     result = put(archive_path, '/tmp/')
@@ -55,6 +57,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
+    """Pack web_static and deploy it"""
     filename = do_pack()
     if filename is None:
         return False
@@ -62,6 +65,7 @@ def deploy():
 
 
 def clean_local(files):
+    """Clean local files"""
     if len(files) > 0:
         for elem in files:
             local("rm -rf versions/" +
@@ -69,6 +73,7 @@ def clean_local(files):
 
 
 def do_clean(number=0):
+    """Clean files from current repo and servers"""
     files = local("ls -1t versions", capture=True)
     files = files.stdout.splitlines()[int(number):]
     for elem in files:

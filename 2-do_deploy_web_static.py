@@ -11,6 +11,7 @@ import os
 
 
 def do_pack():
+    """Pack web_static folder for future deployment"""
     filename = "versions/web_static_{}.tgz".format(
         datetime.now().strftime("%Y%m%d%H%M%S"))
     local("mkdir -p versions")
@@ -25,6 +26,7 @@ env.hosts = ['54.167.41.249', '54.160.234.222']
 
 
 def do_deploy(archive_path):
+    """Deploy given archive to web server"""
     if os.path.exists(archive_path) is False:
         return False
     result = put(archive_path, '/tmp/')
