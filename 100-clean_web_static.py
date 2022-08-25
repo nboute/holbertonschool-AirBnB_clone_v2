@@ -66,20 +66,22 @@ def deploy():
     return do_deploy(filename)
 
 
-def clean_local(files):
-    """Clean local files"""
-    if len(files) > 0:
-        for elem in files:
-            local("rm -rf versions/" +
-                  "{}".format(os.path.basename(elem)))
-
-
 def do_clean(number=0):
     """Clean files from current repo and servers"""
+
     files = local("ls -1t versions", capture=True)
     files = files.stdout.splitlines()[int(number):]
     for elem in files:
-        run("rm -rf /data/web_static/releases/" +
-            "{}".format(os.path.basename(elem)[:-4]))
-    if env.host == env.hosts[-1]:
-        clean_local(files)
+        local("rm -rf versions/" +
+              "{}".format(os.path.basename(elem)))
+    files = run("ls -1t /data/web_static/releases")
+    print("HERE" + files + "<=")
+    files_list = files.splitlines()[int(number):]
+    print("THEN:")
+    print(files_list)
+    print("<=")
+    for elem in files_list:
+        filepath = os.path.basename(elem)
+        if len(filepath) > 0:
+            run("rm -rf /data/web_static/releases/" +
+                "{}".format(filepath))
