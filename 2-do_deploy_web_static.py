@@ -12,6 +12,7 @@ import os
 
 env.hosts = ['54.167.41.249', '54.160.234.222']
 
+
 @runs_once
 def do_pack():
     """Pack web_static folder for future deployment"""
@@ -33,7 +34,8 @@ def do_deploy(archive_path):
     result = put(archive_path, '/tmp/{}'.format(filename))
     if result.failed is True:
         return False
-    result = run("mkdir -p /data/web_static/releases/{}/".format(filename[:-4]))
+    result = run("mkdir -p /data/web_static/releases/{}/"
+                 .format(filename[:-4]))
     if result.failed is True:
         return False
     result = run(("tar -xzf /tmp/" +
