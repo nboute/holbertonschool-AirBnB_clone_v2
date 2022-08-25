@@ -27,21 +27,26 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Deploy given archive to web server"""
+
     if os.path.exists(archive_path) is False:
         return False
+
     filename = os.path.basename(archive_path)
     result = put(archive_path, '/tmp/{}'.format(filename))
     if result.failed is True:
         return False
+
     result = run("mkdir -p /data/web_static/releases/{}/"
                  .format(filename[:-4]))
     if result.failed is True:
         return False
+
     result = run("tar -xzf /tmp/" +
                  "{} -C /data/web_static/releases/{}/"
                  .format(filename, filename[:-4]))
     if result.failed is True:
         return False
+
     result = run("rm /tmp/{}".format(filename))
     if result.failed is True:
         return False
