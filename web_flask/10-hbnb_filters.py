@@ -3,6 +3,8 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+from models.amenity import Amenity
+from os import getenv
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -13,11 +15,12 @@ def teardown(exception):
     storage.close()
 
 
-@app.route("/states_list")
-def states_list():
-    """Routes '/states_list' to a template-based html page using a database"""
-    return render_template('7-states_list.html',
-                           states_list=storage.all(State))
+@app.route("/hbnb_filters")
+def states():
+    """Routes '/hbnb_filters' to a template-based html using a database"""
+    return render_template('10-hbnb_filters.html',
+                           states=storage.all(State),
+                           amenities=storage.all(Amenity))
 
 
 if __name__ == "__main__":

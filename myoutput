@@ -1,0 +1,10 @@
+[54.167.41.249] Executing task 'do_deploy'
+[54.167.41.249] put: versions/web_static_20220825163545.tgz -> /tmp/web_static_20220825163545.tgz
+[54.167.41.249] run: mkdir -p /data/web_static/releases/web_static_20220825163545/
+[54.167.41.249] run: tar -xzf /tmp/web_static_20220825163545.tgz -C /data/web_static/releases/web_static_20220825163545/ --strip-components=1
+[54.167.41.249] run: rm /tmp/web_static_20220825163545.tgz
+[54.167.41.249] run: rm -rf /data/web_static/current
+[54.167.41.249] run: ln -s /data/web_static/releases/web_static_20220825163545/ /data/web_static/current
+New version deployed!
+[54.160.234.222] Executing task 'do_deploy'
+Disconnecting from 54.167.41.249... done.
