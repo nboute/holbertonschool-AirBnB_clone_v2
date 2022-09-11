@@ -8,14 +8,14 @@
 			<h1>States</h1>
 			<ul id="states">
 				{% for state in states.values() | sort(attribute='name') %}
-					<li>{{ state['id'] }}: <b>{{ state['name'] }}</b></li>
+					<li>{{ state.id }}: <b>{{ state.name }}</b></li>
 				{% endfor %}
 		{% elif state %}
 			<h1>State: {{ state.name }}</h1>
 			<h3>Cities:</h3>
 			<ul id="cities">
-				{% for city in state.cities %}
-					<li>City: {{ city['id'] }}: <b>{{ city['name'] }}</b></li>
+				{% for city in state.cities | sort(attribute='name')  %}
+					<li>City: {{ city.id }}: <b>{{ city.name }}</b></li>
 				{% endfor %}
 			</ul>
 		{% else %}
