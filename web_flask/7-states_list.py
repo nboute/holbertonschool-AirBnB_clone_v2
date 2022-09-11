@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module starts a Flask web application:"""
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 from models import storage
 from models.state import State
 
@@ -11,7 +11,7 @@ app.jinja_env.lstrip_blocks = True
 
 
 @app.teardown_appcontext
-def teardown(exception):
+def close(exception):
     """Called on exit"""
     storage.close()
 
