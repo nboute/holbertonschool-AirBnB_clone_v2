@@ -26,7 +26,7 @@ def states():
 @app.route("/states/<id>")
 def states_by_id(id):
     """Routes '/states/<id>' to a template-based html using a database"""
-    state = storage.all(State).values()
+    states = storage.all(State).values()
     state = None
     for elem in states:
         if id == elem.id:
