@@ -1,38 +1,35 @@
 #!/usr/bin/python3
-"""This module starts a Flask web application:"""
+"""Module for the different pages with Flask"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
 
+
 app = Flask(__name__)
-app.url_map.strict_slashes = False
-app.jinja_env.trim_blocks = True
-app.jinja_env.lstrip_blocks = True
 
 
 @app.teardown_appcontext
-def close(exception):
-    """Called on exit"""
+def teardown(exception):
+    """Close storage"""
     storage.close()
 
 
-@app.route("/states")
+@app.route('/states', strict_slashes=False)
 def states():
-    """Routes '/states' to a template-based html using a database"""
-    return render_template('9-states.html',
-                           states=storage.all(State).values())
+    """List all states"""
+    return render_template('9-states.html', states=storage.all(State).values())
 
 
-@app.route("/states/<id>")
-def states_by_id(id):
-    """Routes '/states/<id>' to a template-based html using a database"""
+@app.route('/states/<id>', strict_slashes=False)
+def cities_in_state(id):
+    """List all cities in the state id that was given"""
     states = storage.all(State).values()
     state = None
-    for elem in states:
-        if id == elem.id:
-            state = elem
+    for obj in states:
+        if id == obj.id:
+            state = obj
     return render_template('9-states.html', state=state)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
