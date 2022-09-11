@@ -16,7 +16,7 @@ def close(exception):
     storage.close()
 
 
-@app.route("/states_list")
+@app.route("/states_list", strict_slashes=False)
 def states_list():
     """Routes '/states_list' to a template-based html page using a database"""
     return render_template('7-states_list.html',
