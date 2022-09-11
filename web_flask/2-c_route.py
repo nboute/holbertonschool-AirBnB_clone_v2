@@ -1,29 +1,31 @@
+
+
 #!/usr/bin/python3
-"""This module starts a Flask web application:"""
+"""Module defining the message on the /c page"""
 from flask import Flask
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route("/")
-def hello():
-    """Routes '/' to generic html"""
-    return "Hello HBNB!"
+@app.route('/', strict_slashes=False)
+def index():
+    """return the message for the index"""
+    return 'Hello HBNB!'
 
 
-@app.route("/hbnb")
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """Routes '/hbnb' to generic html"""
-    return "HBNB"
+    """return the message for /hbnb"""
+    return 'HBNB'
 
 
-@app.route("/c/<text>")
-def c_text(text=None):
-    """Routes '/c/<text>' to generic html"""
-    return f'C {text.replace("_", " ")}'
+@app.route('/c/<text>', strict_slashes=False)
+def message(text):
+    """custom message"""
+    text = text.replace('_', ' ')
+    return 'C {}'.format(text)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
