@@ -1,35 +1,37 @@
 #!/usr/bin/python3
-""" Script that starts a Flask web application. """
+"""This module starts a Flask web application:"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
 
 app = Flask(__name__)
-
-
-@app.route('/states', strict_slashes=False)
-def states():
-    """list all states"""
-    states = storage.all(State).values()
-    return render_template('9-states.html', states=states)
-
-
-@app.route('/states/<id>', strict_slashes=False)
-def state_id(id):
-    """list a specific state with their cities"""
-    states = storage.all(State).values()
-    state = None
-    for stat in states:
-        if (stat.id == id):
-            state = stat
-            break
-    return render_template('9-states.html', state=state)
+app.url_map.strict_slashes = False
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
-    """remove the current SQLAlchemy Session after each request"""
+def close(exception):
+    """Called on exit"""
     storage.close()
+
+
+@app.route("/states")
+def states():
+    """Routes '/states' to a template-based html using a database"""
+    return render_template('9-states.html',
+                           states=storage.all(State).values())
+
+
+@app.route("/states/<id>")
+def states_by_id(id):
+    """Routes '/states/<id>' to a template-based html using a database"""
+    states = storage.all(State).values()
+    state = None
+    for elem in states:
+        if id == elem.id:
+            state = elem
+    return render_template('9-states.html', state=state)
 
 
 if __name__ == "__main__":
