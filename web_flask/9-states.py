@@ -26,7 +26,11 @@ def states():
 @app.route("/states/<id>")
 def states_by_id(id):
     """Routes '/states/<id>' to a template-based html using a database"""
-    state = storage.all(State).get('State.{}'.format(id))
+    state = storage.all(State).values
+    state = None
+    for elem in states:
+        if id == elem.id:
+            state = elem
     return render_template('9-states.html',
                            state=state)
 
