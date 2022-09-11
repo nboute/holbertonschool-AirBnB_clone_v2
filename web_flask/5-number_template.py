@@ -19,23 +19,23 @@ def hbnb():
 
 
 @app.route("/c/<text>")
-def text(text=None):
+def ctext(text=None):
     """Routes '/c/<text>' to generic html"""
-    return f'C {text.replace("_", " ")}'
+    return 'C {}'.format(text.replace("_", " "))
 
 
 @app.route("/python")
 @app.route("/python/<text>")
 def python_text(text="is cool"):
     """Routes '/python/<text>' to generic html"""
-    return f'Python {text.replace("_", " ")}'
+    return 'Python {}'.format(text.replace("_", " "))
 
 
 @app.route("/number/<n>")
 def number(n):
     """Routes '/number/<n>' to generic html if number is an integer"""
     try:
-        return f'{int(n)} is a number'
+        return '{} is a number'.format(int(n))
     except ValueError as e:
         abort(404)
 

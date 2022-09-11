@@ -19,16 +19,16 @@ def hbnb():
 
 
 @app.route("/c/<text>")
-def text(text=None):
+def ctext(text=None):
     """Routes '/c/<text>' to generic html"""
-    return f'C {text.replace("_", " ")}'
+    return 'C {}'.format(text.replace("_", " "))
 
 
 @app.route("/python")
 @app.route("/python/<text>")
 def python_text(text="is cool"):
     """Routes '/python/<text>' to generic html"""
-    return f'Python {text.replace("_", " ")}'
+    return 'Python {}'.format(text.replace("_", " "))
 
 
 if __name__ == "__main__":
