@@ -3,7 +3,6 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from os import getenv
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -21,7 +20,7 @@ def close(exception):
 def states():
     """Routes '/states' to a template-based html using a database"""
     return render_template('9-states.html',
-                           states=storage.all(State))
+                           states=storage.all(State).values())
 
 
 @app.route("/states/<id>")
@@ -29,7 +28,7 @@ def states_by_id(id):
     """Routes '/states/<id>' to a template-based html using a database"""
     state = storage.all(State).get('State.{}'.format(id))
     return render_template('9-states.html',
-                           state=storage.all(State).get('State.{}'.format(id)))
+                           state=state)
 
 
 if __name__ == "__main__":
