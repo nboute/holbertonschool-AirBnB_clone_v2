@@ -19,7 +19,7 @@ def hbnb():
 
 
 @app.route("/c/<text>")
-def text(text=None):
+def c_text(text=None):
     """Routes '/c/<text>' to generic html"""
     return f'C {text.replace("_", " ")}'
 
