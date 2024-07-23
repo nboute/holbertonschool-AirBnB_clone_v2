@@ -1,142 +1,133 @@
-<center> <h1>HBNB - The Console</h1> </center>
+# AirBnB Clone - Web Frameworks
 
-This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+This project is part of the AirBnB clone series, aimed at building a web application similar to the AirBnB platform. In this phase, the focus is on developing the backend logic using Flask, a Python web framework, to manage data and serve HTML content. The tasks involve creating a web server, rendering HTML pages dynamically, and handling data persistence with a storage engine (either FileStorage or DBStorage).
 
----
+## Project Overview
 
-<center><h3>Repository Contents by Project Task</h3> </center>
+The project involves building a web application using Flask that integrates with a database to fetch and display data about States, Cities, and Amenities. The application is designed to serve dynamic content, where various URLs are mapped to specific functions that process the data and render HTML pages. The project also emphasizes understanding routing, templates, and working with relational databases using SQLAlchemy in a Python environment.
 
-| Tasks | Files | Description |
-| ----- | ----- | ------ |
-| 0: Authors/README File | [AUTHORS](https://github.com/justinmajetich/AirBnB_clone/blob/dev/AUTHORS) | Project authors |
-| 1: Pep8 | N/A | All code is pep8 compliant|
-| 2: Unit Testing | [/tests](https://github.com/justinmajetich/AirBnB_clone/tree/dev/tests) | All class-defining modules are unittested |
-| 3. Make BaseModel | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a parent class to be inherited by all model classes|
-| 4. Update BaseModel w/ kwargs | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Add functionality to recreate an instance of a class from a dictionary representation|
-| 5. Create FileStorage class | [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/_ _init_ _.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/__init__.py) [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a class to manage persistent file storage system|
-| 6. Console 0.0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Add basic functionality to console program, allowing it to quit, handle empty lines and ^D |
-| 7. Console 0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Update the console with methods allowing the user to create, destroy, show, and update stored data |
-| 8. Create User class | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) | Dynamically implements a user class |
-| 9. More Classes | [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) [/models/place.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/place.py) [/models/city.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/city.py) [/models/amenity.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/amenity.py) [/models/state.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/state.py) [/models/review.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/review.py) | Dynamically implements more classes |
-| 10. Console 1.0 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
-<br>
-<br>
-<center> <h2>General Use</h2> </center>
+## Task Summaries
 
-1. First clone this repository.
+### 0. Hello Flask!
 
-3. Once the repository is cloned locate the "console.py" file and run it as follows:
-```
-/AirBnB_clone$ ./console.py
-```
-4. When this command is run the following prompt should appear:
-```
-(hbnb)
-```
-5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
+**Task:** Write a script that starts a Flask web application.
 
-##### Commands
-    * create - Creates an instance based on given class
+- The web application must listen on `0.0.0.0`, port `5000`.
+- Route `/` should display “Hello HBNB!”.
+- Use the option `strict_slashes=False` in your route definition.
 
-    * destroy - Destroys an object based on class and UUID
+**Summary:** This task sets up the basic Flask application with a single route that returns a simple text response.
 
-    * show - Shows an object based on class and UUID
+### 1. HBNB
 
-    * all - Shows all objects the program has access to, or all objects of a given class
+**Task:** Add a new route to the Flask application.
 
-    * update - Updates existing attributes an object based on class name and UUID
+- Route `/hbnb` should display “HBNB”.
+- Maintain the existing requirements from Task 0.
 
-    * quit - Exits the program (EOF will as well)
+**Summary:** Extend the Flask application with an additional route that returns a specific message when accessed.
 
+### 2. C is fun!
 
-##### Alternative Syntax
-Users are able to issue a number of console command using an alternative syntax:
+**Task:** Add a dynamic route to the Flask application.
 
-	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
-Advanced syntax is implemented for the following commands: 
+- Route `/c/<text>` should display “C ” followed by the value of the `text` variable.
+- Replace underscore `_` symbols in `<text>` with spaces.
 
-    * all - Shows all objects the program has access to, or all objects of a given class
+**Summary:** Implement a dynamic route that accepts a variable, processes it, and displays it in a formatted string.
 
-	* count - Return number of object instances by class
+### 3. Python is cool!
 
-    * show - Shows an object based on class and UUID
+**Task:** Add another dynamic route with a default value.
 
-	* destroy - Destroys an object based on class and UUID
+- Route `/python/(<text>)` should display “Python ” followed by the `text` variable.
+- Replace underscore `_` symbols with spaces.
+- The default value of `text` is “is cool”.
 
-    * update - Updates existing attributes an object based on class name and UUID
+**Summary:** Add a new route similar to Task 2 but with a default value, demonstrating optional parameters in URLs.
 
-<br>
-<br>
-<center> <h2>Examples</h2> </center>
-<h3>Primary Command Syntax</h3>
+### 4. Is it a number?
 
-###### Example 0: Create an object
-Usage: create <class_name>
-```
-(hbnb) create BaseModel
-```
-```
-(hbnb) create BaseModel
-3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb)                   
-```
-###### Example 1: Show an object
-Usage: show <class_name> <_id>
+**Task:** Create a route that handles numeric variables.
 
-```
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-[BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
-'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
-(hbnb)  
-```
-###### Example 2: Destroy an object
-Usage: destroy <class_name> <_id>
-```
-(hbnb) destroy BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-** no instance found **
-(hbnb)   
-```
-###### Example 3: Update an object
-Usage: update <class_name> <_id>
-```
-(hbnb) update BaseModel b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
-(hbnb) show BaseModel b405fc64-9724-498f-b405-e4071c3d857f
-[BaseModel] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
-'updated_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729907), 'first_name': 'person'}
-(hbnb)
-```
-<h3>Alternative Syntax</h3>
+- Route `/number/<n>` should display “n is a number” only if `n` is an integer.
 
-###### Example 0: Show all User objects
-Usage: <class_name>.all()
-```
-(hbnb) User.all()
-["[User] (99f45908-1d17-46d1-9dd2-b7571128115b) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 34, 92071), 'id': '99f45908-1d17-46d1-9dd2-b7571128115b', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 34, 92056)}", "[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
+**Summary:** Introduce integer-specific routing to verify and respond to integer inputs in the URL.
 
-###### Example 1: Destroy a User
-Usage: <class_name>.destroy(<_id>)
-```
-(hbnb) User.destroy("99f45908-1d17-46d1-9dd2-b7571128115b")
-(hbnb)
-(hbnb) User.all()
-(hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
-###### Example 2: Update User (by attribute)
-Usage: <class_name>.update(<_id>, <attribute_name>, <attribute_value>)
-```
-(hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", name "Todd the Toad")
-(hbnb)
-(hbnb) User.all()
-(hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'name': 'Todd the Toad', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
-###### Example 3: Update User (by dictionary)
-Usage: <class_name>.update(<_id>, <dictionary>)
-```
-(hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", {'name': 'Fred the Frog', 'age': 9})
-(hbnb)
-(hbnb) User.all()
-(hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
-<br>
+### 5. Number template
+
+**Task:** Add a route that renders an HTML template.
+
+- Route `/number_template/<n>` should display an HTML page only if `n` is an integer.
+- The page should include an H1 tag: “Number: n”.
+
+**Summary:** Implement a route that uses Jinja2 templates to render HTML content dynamically based on URL parameters.
+
+### 6. Odd or even?
+
+**Task:** Extend the number route to specify odd or even numbers.
+
+- Route `/number_odd_or_even/<n>` should display an HTML page only if `n` is an integer.
+- The page should include an H1 tag: “Number: n is even|odd”.
+
+**Summary:** Add logic to determine if the given number is odd or even and display the result in the HTML content.
+
+### 7. Improve engines
+
+**Task:** Update the storage engine classes.
+
+- Update `FileStorage` with a `close()` method to call `reload()`.
+- Update `DBStorage` with a `close()` method to close the SQLAlchemy session.
+- Update `State` to include a getter method `cities` for related City objects.
+
+**Summary:** Enhance the storage engine with additional methods for better session management and data retrieval from the database.
+
+### 8. List of states
+
+**Task:** Create a Flask route to display all States.
+
+- Route `/states_list` should display an HTML page with a list of all State objects.
+- The list should be sorted by name (A->Z).
+- Implement a method to remove the current SQLAlchemy session after each request.
+
+**Summary:** Develop a route that queries the database for all States and renders them in a sorted list on an HTML page.
+
+### 9. Cities by states
+
+**Task:** Create a route to display Cities within each State.
+
+- Route `/cities_by_states` should display an HTML page with States and their related Cities.
+- The list of States and Cities should be sorted by name (A->Z).
+
+**Summary:** Implement nested data retrieval and display, showing the relationship between States and their Cities.
+
+### 10. States and State
+
+**Task:** Add routes to display details for specific States.
+
+- Route `/states` should display all State objects.
+- Route `/states/<id>` should display Cities linked to a specific State.
+- If a State object is not found, display “Not found!”.
+
+**Summary:** Develop functionality to view all States and drill down into specific States to see their associated Cities.
+
+### 11. HBNB filters
+
+**Task:** Create a dynamic filter page.
+
+- Route `/hbnb_filters` should display a page with filters for States, Cities, and Amenities.
+- Load data from `DBStorage` and sort it by name (A->Z).
+
+**Summary:** Implement filtering functionality to dynamically show data based on selected criteria.
+
+### 12. HBNB is alive!
+
+**Task:** Finalize the Flask application with complete functionality.
+
+- Route `/hbnb` should display a page similar to the static website done previously.
+- Copy and update static files as needed.
+- Ensure all HTML tags from objects are correctly used.
+- Load State, City, Amenity, and Place objects from `DBStorage`.
+
+**Summary:** Integrate all components to create a fully functional web application that simulates the AirBnB platform with dynamic data loading and display.
+
