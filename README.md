@@ -7,6 +7,7 @@ All instructions mentionned here refer to the Holberton School project's tasks. 
 
 The project involves building a web application using Flask that integrates with a database to fetch and display data about States, Cities, and Amenities. The application is designed to serve dynamic content, where various URLs are mapped to specific functions that process the data and render HTML pages. The project also emphasizes understanding routing, templates, and working with relational databases using SQLAlchemy in a Python environment.
 
+![Project graph](https://s3.eu-west-3.amazonaws.com/hbtn.intranet.project.files/concepts/74/hbnb_step3.png)
 ## Task Summaries
 
 ### 0. Hello Flask!
