@@ -2,6 +2,7 @@
 
 This project is part of the AirBnB clone series, aimed at building a web application similar to the AirBnB platform. In this phase, the focus is on developing the backend logic using Flask, a Python web framework, to manage data and serve HTML content. The tasks involve creating a web server, rendering HTML pages dynamically, and handling data persistence with a storage engine (either FileStorage or DBStorage).
 
+All instructions mentionned here refer to the Holberton School project's tasks. They are already implemented in the project.
 ## Project Overview
 
 The project involves building a web application using Flask that integrates with a database to fetch and display data about States, Cities, and Amenities. The application is designed to serve dynamic content, where various URLs are mapped to specific functions that process the data and render HTML pages. The project also emphasizes understanding routing, templates, and working with relational databases using SQLAlchemy in a Python environment.
